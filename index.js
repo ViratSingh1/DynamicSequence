@@ -140,8 +140,8 @@ app.get('/registerUtil.html', function(req, res) {
 app.get('/signUtil.html', function(req, res) {
     res.sendFile(__dirname + "/signUtil.html");
 });
-app.get('/solve.html', function(req, res) {
-    res.sendFile(__dirname + "/solve.html");
+app.get('/sol.html', function(req, res) {
+    res.sendFile(__dirname + "/sol.html");
 });
 app.get('/dashboard.html', function(req, res) {
     res.sendFile(__dirname + "/dashboard.html");

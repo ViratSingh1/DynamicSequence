@@ -1,10 +1,10 @@
-div<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
 
 <head>
 
-  <title>W3.CSS Template</title>
+  <title>Dashboard</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,8 +59,24 @@ th, .value
   color: white;
 }
 
+.w3-button:hover, .sbtn:hover
+{
+  background-color: #9d97fd;
+  border-radius: 10px;
+}
+
+.sbtn
+{ 
+  text-shadow: 2px 2px 4px #9d97fd;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #AFB4FF, #B1E1FF, #AFB4FF);
+  margin: 4px;
+}
+
 </style>
+
 </head>
+
 <body>
 
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
@@ -76,12 +92,12 @@ th, .value
   </div>
   <hr>
   <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding"><h3> Overview</h3></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><h3> Global Alignments</h3></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><h3> Local Alignments</h3></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><h3> SemiLocal Alignments</h3></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><h3> Settings</h3></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><h3> Sign Out</h3></a>
+    <div class="sbtn w3-card-4"><a href="#" class="w3-bar-item w3-button w3-padding-8"><h3> Overview</h3></a></div>
+    <div class="sbtn w3-card-4"><a href="#" class="w3-bar-item w3-button w3-padding-8"><h3> Global Alignments</h3></a></div>
+    <div class="sbtn w3-card-4"><a href="#" class="w3-bar-item w3-button w3-padding-8"><h3> Local Alignments</h3></a></div>
+    <div class="sbtn w3-card-4"><a href="#" class="w3-bar-item w3-button w3-padding-8"><h3> SemiLocal Alignments</h3></a></div>
+    <div class="sbtn w3-card-4"><a href="#" class="w3-bar-item w3-button w3-padding-8"><h3> Settings</h3></a></div>
+    <div class="sbtn w3-card-4"><a href="#" class="w3-bar-item w3-button w3-padding-8"><h3> Sign Out</h3></a></div>
   </div>
 </nav>
 
@@ -90,7 +106,7 @@ th, .value
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
 
   <header class="w3-container" style="padding-top:22px">
-    <h4><b>Stats</b></h4>
+    <h4 style="padding-left: 8px;"><b>Stats</b></h4>
   </header>
   
   <div class="w3-row-padding w3-margin-bottom">
@@ -123,7 +139,7 @@ th, .value
 
     <div class="w3-quarter">
       <div class="w3-container btn-stat w3-padding-16 w3-card-4">
-        <div class="w3-left"><h3><b>Semi-Local</b></h3></div>
+        <div class="w3-left"><h3><b>SemiLocal</b></h3></div>
         <div class="w3-right">
           <h3 class="value">65</h3>
         </div>
@@ -141,18 +157,7 @@ th, .value
             <th>Alignment Score</th>
             <th style="border-radius: 0 10px 0 0;">Timestamp</th>
           </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
+          
           <tr>
             <td>171</td>
             <td>Global Alignment</td>
