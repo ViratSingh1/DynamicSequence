@@ -1,0 +1,58 @@
+
+a:link
+{
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+table
+{
+  border-radius: 10px;
+}
+
+.btn-stat
+{
+  background-color: black;
+  color: lightgray;
+  border-radius: 10px;
+}
+
+.sbar
+{
+  background-image: linear-gradient(to right, #A66CFF, #9C9EFE, #A66CFF);
+}
+
+html,body
+{
+  font-family: 'Share Tech Mono', monospace;
+  background-image: linear-gradient(to right, #9C9EFE, #AFB4FF, #9C9EFE);
+}
+
+h1,h2,h3,h4,h5,h6
+{
+  font-family: 'Share Tech Mono', monospace;
+}
+
+th, .value
+{
+  background-color: black;
+  color: white;
+}
+
+.w3-button:hover, .sbtn:hover
+{
+  background-color: #9d97fd;
+  border-radius: 10px;
+}
+
+.sbtn
+{ 
+  text-shadow: 2px 2px 4px #9d97fd;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #AFB4FF, #B1E1FF, #AFB4FF);
+  margin: 4px;
+}
+
+
+
