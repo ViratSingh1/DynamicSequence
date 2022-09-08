@@ -1,0 +1,178 @@
+textarea 
+{
+  width: 100%;
+  height: 380px;
+  padding: 6px;
+  border: none;
+  border-radius: 0px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; 
+  border-color: solid black;
+  overflow-y: auto;
+}
+
+input:hover, .btn:hover 
+{
+  opacity: 1;
+}
+
+input[type=submit] 
+{
+  background-color: #04AA6D;
+  color: white;
+  cursor: pointer;
+}
+
+input[type=submit]:hover 
+{
+  background-color: #45a049;
+}
+
+
+body, html 
+{
+  height: 100%;
+  background-image: linear-gradient(to right, #9C9EFE, #A66CFF, #9C9EFE);
+}
+
+*
+{
+  font-family: 'Share Tech Mono', monospace;
+}
+
+a:link
+{
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited 
+{
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+h4
+{
+  margin: 0 11% 0 38%;
+}
+
+.tdesc
+{
+  font-size: 25px;
+}
+
+.menu 
+{
+  display: none;
+}
+
+.bgimg 
+{
+  background-image: linear-gradient(to right, #9C9EFE, #A66CFF, #9C9EFE);
+  min-height: 92%; 
+}
+
+.div1{
+  z-index: 1;
+ width: 100%;
+ padding-top: 2%;
+ height: 1000px;
+ }
+
+.nav-link
+{
+    color: #A66CFF;
+}
+
+.button3
+{
+  margin-left: 46%;
+}
+
+@media screen and (max-width: 650px)
+{
+  .button3
+  {
+    margin-left: 38%;
+  }  
+
+  .navbar, .container-fluid
+  {
+    padding: 10px;
+  }
+
+  .disp
+  {
+    font-size: medium;
+  }
+
+  h4 
+  {
+    margin: 0 20% 0 23%;
+  }
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover 
+{
+  background-color: #45a049;
+}
+
+.footer
+{
+  position: absolute;
+  padding: 20px;
+  width: 100%;
+  height: fit-content;
+  background-color: #182022f1;
+  color: white;
+  text-align: center;
+}
+
+.typewriter {
+  overflow: hidden;
+  border-right: .15em solid orange; 
+  white-space: nowrap; 
+  margin: 0 auto; 
+  letter-spacing: 0.02em;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
