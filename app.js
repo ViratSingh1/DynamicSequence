@@ -132,12 +132,12 @@ app.get('/registerUtil', function(req, res) {
     res.render('registerUtil');
 });
 
-app.get('signUtil', function(req, res) {
+app.get('/signUtil', function(req, res) {
     res.render('signUtil');
 });
 
-app.get('sol', function(req, res) {
-    res.render('sol');
+app.get('/sol', function(req, res) {
+    res.render('sol', {fval: "", sval: "", val: "", category : "", id : [1,2,3,4]});
 });
 
 app.get('/dashboard', function(req, res) {
