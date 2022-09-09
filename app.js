@@ -141,7 +141,17 @@ app.get('sol', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    res.render("dashboard");
+    var vals = [{id : 182, category : 'Global alignment', value : 83, stamp : 'qwerty'},
+                {id : 241, category : 'Global alignment', value : 88, stamp : 'qwerty'},
+                {id : 184, category : 'Global alignment', value : 91, stamp : 'qwerty'},
+                {id : 389, category : 'Global alignment', value : 68, stamp : 'qwerty'},
+                {id : 421, category : 'Global alignment', value : 83, stamp : 'qwerty'},
+                {id : 591, category : 'Global alignment', value : 83, stamp : 'qwerty'},
+                {id : 091, category : 'Global alignment', value : 83, stamp : 'qwerty'},
+                {id : 167, category : 'Global alignment', value : 83, stamp : 'qwerty'},
+                {id : 205, category : 'Global alignment', value : 83, stamp : 'qwerty'},
+                {id : 201, category : 'Global alignment', value : 83, stamp : 'qwerty'}];
+    res.render("dashboard", {name : 'bot', totalVal : 885, globalVal : 81, localVal : 65, semiLocalVal : 21, vals : vals});
 });
 
 app.post('/register', function(req, res) {

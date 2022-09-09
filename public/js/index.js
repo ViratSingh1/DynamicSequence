@@ -1,4 +1,20 @@
 
+function openMenu(evt, menuName) 
+{
+    var i, x, tablinks;
+    x = document.getElementsByClassName("menu");
+    for (i = 0; i < x.length; i++)
+    {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < x.length; i++) 
+    {
+        tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+    }
+    document.getElementById(menuName).style.display = "block";
+    evt.currentTarget.firstElementChild.className += " w3-red";
+}
 function searchr() 
 {
     var input, filter, ul, li, a, i, txtValue;
@@ -20,9 +36,8 @@ function searchr()
         }
     }
 }
-
 function validateInput() 
-    {
+{
     let fs = document.forms["fillValues"]["firstSeq"].value;
     let ss = document.forms["fillValues"]["secondSeq"].value;
     let fv = document.forms["fillValues"]["matchValue"].value;
@@ -63,3 +78,4 @@ function validateInput()
         }
     }
 }
+

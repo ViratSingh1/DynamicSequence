@@ -28,7 +28,7 @@
 <nav class="w3-sidebar sbar w3-collapse w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container w3-row">
     <div class="w3-col s8 w3-bar">
-      <br><span><h3>Welcome, <b>Bot</b></h3></span><br>
+      <br><span><h3>Welcome, <b><%= name %></b></h3></span><br>
     </div>
   </div>
   <hr>
@@ -55,7 +55,7 @@
       <div class="w3-container btn-stat w3-padding-16 w3-card-4">
         <div class="w3-left"><h3><b>Total</b></h3></div>
         <div class="w3-right">
-          <h3 class="value">885</h3>
+          <h3 class="value"><%= totalVal %></h3>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
       <div class="w3-container btn-stat w3-padding-16 w3-card-4">
         <div class="w3-left"><h3><b>Global</b></h3></div>
         <div class="w3-right">
-          <h3 class="value">99</h3>
+          <h3 class="value"><%= globalVal %></h3>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
       <div class="w3-container btn-stat w3-padding-16 w3-card-4">
         <div class="w3-left"><h3><b>Local</b></h3></div>
         <div class="w3-right">
-          <h3 class="value">45</h3>
+          <h3 class="value"><%= localVal %></h3>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
       <div class="w3-container btn-stat w3-padding-16 w3-card-4">
         <div class="w3-left"><h3><b>SemiLocal</b></h3></div>
         <div class="w3-right">
-          <h3 class="value">65</h3>
+          <h3 class="value"><%= semiLocalVal %></h3>
         </div>
       </div>
     </div>
@@ -98,62 +98,21 @@
             <th>Alignment Score</th>
             <th style="border-radius: 0 10px 0 0;">Timestamp</th>
           </tr>
-          
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
-          <tr>
-            <td>171</td>
-            <td>Global Alignment</td>
-            <td>89</td>
-            <td>qwerty</td>
-          </tr>
+          <% vals.forEach(function(val) {%>
+            <tr>
+              <td><%= val.id %></td>
+              <td><%= val.category %></td>
+              <td><%= val.value %></td>
+              <td><%= val.stamp %></td>
+            </tr>
+          <% });%>
         </table>
       </div>
     </div>
   </div>
 </div>
 
-<script scr="/js/dashboard.js"></script>
+<script type="text/javascript" src="/js/dashboard.js"></script>
 
 </body>
 </html>
