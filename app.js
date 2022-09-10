@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const mongoose = require("mongoose");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+mongoose.connect("mongodb://localhost:27017/dynamicSequenceDB", {useNewUrlParser: true});
 
 class solve
 {
@@ -137,7 +139,7 @@ app.get('/signUtil', function(req, res) {
 });
 
 app.get('/sol', function(req, res) {
-    res.render('sol', {fval: "", sval: "", val: "", category : "", id : [1,2,3,4]});
+    res.render('sol', {fval: "", sval: "", val: "", category : "Global Alignment", id : [1,2,3,[1,2,3,4],5]});
 });
 
 app.get('/dashboard', function(req, res) {
