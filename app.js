@@ -1,11 +1,74 @@
 const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const findOrCreate = require('mongoose-findorcreate');
+
 app.use(bodyParser.urlencoded({extended:true}));
-app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
 mongoose.connect("mongodb://localhost:27017/dynamicSequenceDB", {useNewUrlParser: true});
+mongoose.set("useCreateIndex", true);
+
+const userSchema = new mongoose.Schema({
+    email : String,
+    password: String,
+    googleId: String,
+    AlignmentId: String
+});
+
+const SeqSchema = new mongoose.Schema ({
+    sequenceId: String,
+    sequenceValue: String,
+});
+
+
+app.use(session({
+  secret: "DS DynamicSequence",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
+
+const User = new mongoose.model("User", userSchema);
+const Sequence = new mongoose.model("Sequence", userSchema);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/google/DS",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 
 class solve
 {
@@ -126,16 +189,19 @@ class solve
     }
 }
 
+app.get("/auth/google",
+  passport.authenticate('google', { scope: ["profile"] })
+);
+
+app.get("/auth/google/dashboard",
+  passport.authenticate('google', { failureRedirect: "/login" }),
+  function(req, res) {
+    // Successful authentication, redirect to secrets.
+    res.redirect("/secrets");
+  });
+
 app.get('/', function(req, res) {
     res.render('index');
-});
-
-app.get('/registerUtil', function(req, res) {
-    res.render('registerUtil');
-});
-
-app.get('/signUtil', function(req, res) {
-    res.render('signUtil');
 });
 
 app.get('/sol', function(req, res) {
@@ -143,26 +209,108 @@ app.get('/sol', function(req, res) {
 });
 
 app.get('/dashboard', function(req, res) {
-    var vals = [{id : 182, category : 'Global alignment', value : 83, stamp : 'qwerty'},
-                {id : 241, category : 'Global alignment', value : 88, stamp : 'qwerty'},
-                {id : 184, category : 'Global alignment', value : 91, stamp : 'qwerty'},
-                {id : 389, category : 'Global alignment', value : 68, stamp : 'qwerty'},
-                {id : 421, category : 'Global alignment', value : 83, stamp : 'qwerty'},
-                {id : 591, category : 'Global alignment', value : 83, stamp : 'qwerty'},
-                {id : 091, category : 'Global alignment', value : 83, stamp : 'qwerty'},
-                {id : 167, category : 'Global alignment', value : 83, stamp : 'qwerty'},
-                {id : 205, category : 'Global alignment', value : 83, stamp : 'qwerty'},
-                {id : 201, category : 'Global alignment', value : 83, stamp : 'qwerty'}];
+    var vals = findById(req.body.googleId);
     res.render("dashboard", {name : 'bot', totalVal : 885, globalVal : 81, localVal : 65, semiLocalVal : 21, vals : vals});
 });
 
-app.post('/register', function(req, res) {
-    res.send("now it is possible to post");
-});
+app.post('/solve', function (req, res) {
+    solve s;
+    var sol = s.localSolve(req.body.first_seq,req.body.second_seq);
+    res.render("solve", {first_seq: sol.solp, second_seq: sol.solq});
+})
+
 
 app.get('/index', function(req, res) {
     res.render('index');
 });
+
+app.get("/auth/google/solve",
+  passport.authenticate('google', { failureRedirect: "/login" }),
+  function(req, res) {
+    res.redirect("/solve");
+  });
+
+app.get("/signUtil", function(req, res){
+  res.render("login");
+});
+
+app.get("/registerUtil", function(req, res){
+  res.render("register");
+});
+
+app.get("/solve", function(req, res){
+  User.find({"solve": {$ne: null}}, function(err, foundUsers){
+    if (err){
+      console.log(err);
+    } else {
+      if (foundUsers) {
+        res.render("solve", {usersWithSecrets: foundUsers});
+      }
+    }
+  });
+});
+
+app.get("/submit", function(req, res){
+  if (req.isAuthenticated()){
+    res.render("submit");
+  } else {
+    res.redirect("/login");
+  }
+});
+
+  User.findById(req.user.id, function(err, foundUser){
+    if (err) {
+      console.log(err);
+    } else {
+      if (foundUser) {
+        foundUser.AlignementId = submittedSecret;
+        foundUser.save(function(){
+          res.redirect("/solve");
+        });
+      }
+    }
+  });
+});
+
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/");
+});
+
+app.post("/register", function(req, res){
+
+  User.register({username: req.body.username}, req.body.password, function(err, user){
+    if (err) {
+      console.log(err);
+      res.redirect("/register");
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/Dashboard");
+      });
+    }
+  });
+
+});
+
+app.post("/signUtil", function(req, res){
+
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password
+  });
+
+  req.login(user, function(err){
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req, res, function(){
+        res.redirect("/Dashboard");
+      });
+    }
+  });
+
+});
+
 
 app.listen(3000);
 
