@@ -158,7 +158,7 @@ app.post('/solve', function(req, res) {
     }
 });
 
-app.route('/dashboard/:displayName').get('/dashboard', function(req, res){
+app.route('/dashboard/:displayName').get(function(req, res){
     let vals_ = alignDB.findById(User.findById(req.params.displayName));
     let val = User.findById(req.params.displayName).totalValue;
     res.render("dashboard", {name : displayName, totalVal : val.totalVal, globalVal : val.globalVal, localVal : val.localVal, semiLocalVal : val.semiLocalVal, vals : [vals_.alignmentID, vals_.alignmentCategory, vals_.alignmentScore, vals_.alignmentID]});
