@@ -15,7 +15,7 @@ solve(str_p, str_q)
     rows = str.length + 1;
     cols = ptr.length + 1;
     globalSolveInit();
-    globaalSolveUtil();
+    globalSolveUtil();
     return [sol_p, sol_q];
 }
 
